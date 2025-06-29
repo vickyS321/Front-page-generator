@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Front Page Generator - FGP</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      max-width: 600px;
+      margin: auto;
+      background: #f7f7f7;
+    }
+    h1 {
+      text-align: center;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    label {
+      font-weight: bold;
+    }
+    input, select, button {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      background-color: #28a745;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <h1>FGP Front Page Generator</h1>
+  <form id="frontPageForm">
+    <label>Branch:
+      <select name="branch">
+        <option>Computer Science</option>
+        <option>Mechanical</option>
+        <option>Electronics</option>
+        <option>IC</option>
+        <option>PGDCA</option>
+      </select>
+    </label><label>Session:
+  <input type="text" name="session" placeholder="e.g. 2024-2025" required />
+</label>
+
+<label>Year & Semester:
+  <input type="text" name="yearSemester" placeholder="e.g. 2nd Year, 4th Sem" required />
+</label>
+
+<label>Subject:
+  <input type="text" name="subject" required />
+</label>
+
+<label>Teacher Name:
+  <input type="text" name="teacher" required />
+</label>
+
+<button type="submit">Generate Front Page</button>
+
+  </form>  <script>
+    document.getElementById("frontPageForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const data = new FormData(e.target);
+
+      const frontPageHTML = `
+        <html>
+        <head>
+          <title>Front Page</title>
+          <style>
+            body { font-family: Arial; text-align: center; margin-top: 100px; }
+            h1 { font-size: 32px; }
+            h2 { font-size: 24px; margin-bottom: 30px; }
+            p { font-size: 18px; margin: 10px; }
+          </style></head>
+    <body>
+      <h1>Feroze Gandhi Polytechnic</h1>
+      <h2>${data.get("branch")}</h2>
+      <p><strong>Session:</strong> ${data.get("session")}</p>
+      <p><strong>Year & Semester:</strong> ${data.get("yearSemester")}</p>
+      <p><strong>Subject:</strong> ${data.get("subject")}</p>
+      <p><strong>Teacher:</strong> ${data.get("teacher")}</p>
+    </body>
+    </html>
+  `;
+
+  const newWindow = window.open();
+  newWindow.document.write(frontPageHTML);
+  newWindow.document.close();
+});
+
+  </script>
+</body>
+</html>
